@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "lasercraft",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Laser Craft",
+  "description": "LaserCraft is remake of old The Laser Mod",
   "authors": [
-    "Me!"
+    "Prefex"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://dczippl.tk/",
+    "sources": "https://github.com/DcZipPL/LaserCraftMod"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/lasercraft/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "tk.dczippl.lasercraft.LaserCraft"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "lasercraft.mixins.json"
   ],
 
   "depends": {
