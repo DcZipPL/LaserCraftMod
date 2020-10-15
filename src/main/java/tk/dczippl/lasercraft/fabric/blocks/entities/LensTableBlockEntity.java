@@ -17,7 +17,7 @@ import tk.dczippl.lasercraft.fabric.screens.handlers.LensTableScreenHandler;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
 
 public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
-	private int invsize = 9;
+	private int invsize = 6;
 	private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
 
 	public LensTableBlockEntity() {

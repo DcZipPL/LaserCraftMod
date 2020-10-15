@@ -20,14 +20,14 @@ public class LensTableScreenHandler extends ScreenHandler {
 	//The client will call the other constructor with an empty Inventory and the screenHandler will automatically
 	//sync this empty inventory with the inventory on the server.
 	public LensTableScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(2));
+		this(syncId, playerInventory, new SimpleInventory(6));
 	}
 
 	//This constructor gets called from the BlockEntity on the server without calling the other constructor first, the server knows the inventory of the container
 	//and can therefore directly provide it as an argument. This inventory will then be synced to the client.
 	public LensTableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
 		super(LaserCraft.LENS_TABLE_SCREEN_HANDLER, syncId);
-		checkSize(inventory, 2);
+		checkSize(inventory, 6);
 		this.inventory = inventory;
 		//some inventories do custom logic when a player opens it.
 		inventory.onOpen(playerInventory.player);
@@ -37,8 +37,12 @@ public class LensTableScreenHandler extends ScreenHandler {
 		int m;
 		int l;
 		//Our inventory
-		this.addSlot(new LaserSlot(LENS,inventory, 0, 8, 8));
-		this.addSlot(new LaserSlot(COIL,inventory, 1, 8, 62));
+		this.addSlot(new Slot(inventory, 0, 55, 16));
+		this.addSlot(new Slot(inventory, 1, 55, 34));
+		this.addSlot(new Slot(inventory, 2, 55, 52));
+		this.addSlot(new Slot(inventory, 3, 55, 70));
+		this.addSlot(new Slot(inventory, 4, 37, 52));
+		this.addSlot(new Slot(inventory, 5, 73, 52));
 
 		//The player inventory
 		for (m = 0; m < 3; ++m) {
