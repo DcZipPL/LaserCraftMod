@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Laser Craft",
-  "description": "LaserCraft is remake of old The Laser Mod",
+  "description": "LaserCraft is adaptation of old The Laser Mod",
   "authors": [
     "Prefex"
   ],
@@ -20,6 +20,12 @@
   "entrypoints": {
     "main": [
       "tk.dczippl.lasercraft.LaserCraft"
+    ],
+    "client": [
+      "tk.dczippl.lasercraft.ClientLaserCraft"
+    ],
+    "rei_plugins_v0": [
+      "me.shedaniel.rei.plugin.DefaultPlugin"
     ]
   },
   "mixins": [

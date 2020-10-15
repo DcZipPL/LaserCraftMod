@@ -12,6 +12,8 @@ public class ModItems {
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
 
+	public static final Item REDSTONE_CRYSTAL = registerItem("redstone_crystal", new Item(new Item.Settings()));
+
 	public static void register() {}
 
 	public static Item registerItem(String name, Item item)

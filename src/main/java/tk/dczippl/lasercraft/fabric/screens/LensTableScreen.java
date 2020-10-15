@@ -9,13 +9,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import tk.dczippl.lasercraft.LaserCraft;
 
-public class LaserScreen extends HandledScreen<ScreenHandler> {
+public class LensTableScreen extends HandledScreen<ScreenHandler> {
 	//A path to the gui texture.
-	private static final Identifier TEXTURE = LaserCraft.idFrom("textures/gui/container/laser_device.png");
+	private static final Identifier TEXTURE = LaserCraft.idFrom("textures/gui/container/lens_bench.png");
 
-	public LaserScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
+	public LensTableScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, title);
-		this.backgroundHeight = 184;
+		this.backgroundHeight = 203;
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class LaserScreen extends HandledScreen<ScreenHandler> {
 		super.init();
 		// Center the title
 		titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
-		playerInventoryTitleY+=19;
+		playerInventoryTitleY+=38;
 	}
 }

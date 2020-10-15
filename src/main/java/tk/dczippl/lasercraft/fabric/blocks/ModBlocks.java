@@ -12,6 +12,7 @@ import tk.dczippl.lasercraft.fabric.items.ModItems;
 public class ModBlocks {
 
 	public static final Block LASER_BLOCK = registerBlock("laser_block", new LaserBlock());
+	public static final Block LENS_TABLE = registerBlock("lens_table", new LensTableBlock());
 
 	public static void register() {}
 

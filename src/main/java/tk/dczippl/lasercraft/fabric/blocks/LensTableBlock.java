@@ -12,11 +12,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
+import tk.dczippl.lasercraft.fabric.blocks.entities.LensTableBlockEntity;
 
-public class LaserBlock extends BlockWithEntity {
-
-	public LaserBlock() {
-		super(Settings.of(Material.STONE));
+public class LensTableBlock extends BlockWithEntity {
+	public LensTableBlock() {
+		super(Settings.of(Material.METAL));
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class LaserBlock extends BlockWithEntity {
 	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 		if (state.getBlock() != newState.getBlock()) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof LaserBlockEntity) {
-				ItemScatterer.spawn(world, pos, (LaserBlockEntity)blockEntity);
+			if (blockEntity instanceof LensTableBlockEntity) {
+				ItemScatterer.spawn(world, pos, (LensTableBlockEntity)blockEntity);
 				// update comparators
 				world.updateComparators(pos,this);
 			}
@@ -57,6 +57,6 @@ public class LaserBlock extends BlockWithEntity {
 
 	@Override
 	public BlockEntity createBlockEntity(BlockView world) {
-		return new LaserBlockEntity();
+		return new LensTableBlockEntity();
 	}
 }
