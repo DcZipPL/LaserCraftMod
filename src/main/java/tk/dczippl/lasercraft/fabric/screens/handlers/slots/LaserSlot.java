@@ -3,6 +3,8 @@ package tk.dczippl.lasercraft.fabric.screens.handlers.slots;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
+import tk.dczippl.lasercraft.fabric.items.CoilItem;
+import tk.dczippl.lasercraft.fabric.items.LensItem;
 
 public class LaserSlot extends Slot {
 	private SlotType slotType;
@@ -19,7 +21,7 @@ public class LaserSlot extends Slot {
 				: stack.getItem() instanceof CoilItem && super.canInsert(stack);
 	}
 
-	enum SlotType{
+	public static enum SlotType{
 		LENS,
 		COIL
 	}
