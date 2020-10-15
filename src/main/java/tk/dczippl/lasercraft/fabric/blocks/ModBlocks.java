@@ -11,7 +11,7 @@ import tk.dczippl.lasercraft.fabric.items.ModItems;
 
 public class ModBlocks {
 
-	public static final Block LASER_BLOCK = registerBlock("obsidian_bricks", new LaserBlock());
+	public static final Block LASER_BLOCK = registerBlock("laser_block", new LaserBlock());
 
 	public static void register() {}
 
