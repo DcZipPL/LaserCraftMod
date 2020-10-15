@@ -8,6 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import tk.dczippl.lasercraft.LaserCraft;
+import tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot;
+
+import static tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot.SlotType.COIL;
+import static tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot.SlotType.LENS;
 
 public class LaserScreenHandler extends ScreenHandler {
 	private final Inventory inventory;
@@ -16,14 +20,14 @@ public class LaserScreenHandler extends ScreenHandler {
 	//The client will call the other constructor with an empty Inventory and the screenHandler will automatically
 	//sync this empty inventory with the inventory on the server.
 	public LaserScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(9));
+		this(syncId, playerInventory, new SimpleInventory(2));
 	}
 
 	//This constructor gets called from the BlockEntity on the server without calling the other constructor first, the server knows the inventory of the container
 	//and can therefore directly provide it as an argument. This inventory will then be synced to the client.
 	public LaserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
 		super(LaserCraft.LASER_SCREEN_HANDLER, syncId);
-		checkSize(inventory, 9);
+		checkSize(inventory, 2);
 		this.inventory = inventory;
 		//some inventories do custom logic when a player opens it.
 		inventory.onOpen(playerInventory.player);
@@ -33,11 +37,9 @@ public class LaserScreenHandler extends ScreenHandler {
 		int m;
 		int l;
 		//Our inventory
-		for (m = 0; m < 3; ++m) {
-			for (l = 0; l < 3; ++l) {
-				this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
-			}
-		}
+		this.addSlot(new LaserSlot(LENS,inventory, 0, 8, 8));
+		this.addSlot(new LaserSlot(COIL,inventory, 1, 8, 62));
+
 		//The player inventory
 		for (m = 0; m < 3; ++m) {
 			for (l = 0; l < 9; ++l) {

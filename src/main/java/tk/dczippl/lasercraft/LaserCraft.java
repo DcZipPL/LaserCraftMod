@@ -12,7 +12,7 @@ import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
 public class LaserCraft implements ModInitializer {
 	public static String MOD_ID = "lasercraft";
 
-	public static Identifier modId(String location) {
+	public static Identifier idFrom(String location) {
 		return new Identifier(MOD_ID,location);
 	}
 
@@ -31,6 +31,6 @@ public class LaserCraft implements ModInitializer {
 	static {
 		//We use registerSimple here because our Entity is not an ExtendedScreenHandlerFactory
 		//but a NamedScreenHandlerFactory.
-		LASER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(modId("laser"), LaserScreenHandler::new);
+		LASER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(idFrom("laser"), LaserScreenHandler::new);
 	}
 }
