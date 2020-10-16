@@ -14,9 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Quaternion;
 import tk.dczippl.lasercraft.LaserCraft;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 import tk.dczippl.lasercraft.fabric.items.ModItems;
+
+import static net.minecraft.util.math.Direction.*;
 
 public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity> {
 	public LaserBlockEntityRender(BlockEntityRenderDispatcher dispatcher) {
@@ -25,21 +28,90 @@ public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity
 
 	@Override
 	public void render(LaserBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+
 		matrices.push();
-		matrices.translate(0,0,0.51f);
+		float x = 0;
+		float y = 0;
+		float z = 0;
+
+		Direction direction = entity.getDirection();
+		if (direction==NORTH||direction==SOUTH){
+			z = 0.501f;
+			z *= direction==NORTH ? 1 : -1;
+		}
+		if (direction==WEST||direction==EAST){
+			x = 0.501f;
+			x *= direction==WEST ? 1 : -1;
+		}
+		if (direction==UP||direction==DOWN){
+			y = 0.501f;
+			y *= direction==UP ? 1 : -1;
+		}
+
+		matrices.translate(x, y, z);
 		MinecraftClient.getInstance().getItemRenderer().renderItem(new ItemStack(ModItems.REDSTONE_CRYSTAL), ModelTransformation.Mode.FIXED,light,overlay,matrices,vertexConsumers);
+
 
 		Sprite sprite = MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).apply(LaserCraft.idFrom("block/part/white_lens_hole"));
 		VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getCutout());
-		add(vertexConsumer, matrices, 0, 0, .5f, sprite.getMinU(), sprite.getMinV());
-		add(vertexConsumer, matrices, 1, 0, .5f, sprite.getMaxU(), sprite.getMinV());
-		add(vertexConsumer, matrices, 1, 1, .5f, sprite.getMaxU(), sprite.getMaxV());
-		add(vertexConsumer, matrices, 0, 1, .5f, sprite.getMinU(), sprite.getMaxV());
 
+		addFace(sprite,matrices,vertexConsumer, entity.getDirection());
 		matrices.pop();
+
+		/*matrices.push();
+		matrices.translate(0,0,-0.501f);
+		addFace(sprite,matrices,vertexConsumer, Direction.SOUTH);
+		matrices.pop();
+		matrices.push();
+		matrices.translate(-0.501f,0,0);
+		addFace(sprite,matrices,vertexConsumer, WEST);
+		matrices.pop();
+		matrices.push();
+		matrices.translate(0.501f,0,0);
+		addFace(sprite,matrices,vertexConsumer, Direction.EAST);
+		matrices.pop();*/
 	}
 
-	private void add(VertexConsumer renderer, MatrixStack stack, float x, float y, float z, float u, float v) {
+	private void addFace(Sprite sprite, MatrixStack matrices, VertexConsumer vertexConsumer, Direction direction){
+		if (direction== NORTH) {
+			addVertex(vertexConsumer, matrices, 0, 0, .5f, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1, 0, .5f, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1, 1, .5f, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, 0, 1, .5f, sprite.getMinU(), sprite.getMaxV());
+		}
+		if (direction==SOUTH) {
+			addVertex(vertexConsumer, matrices, 0, 0, .5f, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 0, 1, .5f, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1, 1, .5f, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, 1, 0, .5f, sprite.getMinU(), sprite.getMaxV());
+		}
+		if (direction==EAST) {
+			addVertex(vertexConsumer, matrices, .5f, 0, 0, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, .5f, 0, 1, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, .5f, 1, 1, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, .5f, 1, 0, sprite.getMinU(), sprite.getMaxV());
+		}
+		if (direction==WEST) {
+			addVertex(vertexConsumer, matrices, .5f, 0, 0, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, .5f, 1, 0, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, .5f, 1, 1, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, .5f, 0, 1, sprite.getMinU(), sprite.getMaxV());
+		}
+		if (direction==UP) {
+			addVertex(vertexConsumer, matrices, 0,.5f, 0, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 0,.5f, 1, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1,.5f, 1, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, 1,.5f,0, sprite.getMinU(), sprite.getMaxV());
+		}
+		if (direction==DOWN) {
+			addVertex(vertexConsumer, matrices, 0,.5f, 0, sprite.getMinU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1,.5f, 0, sprite.getMaxU(), sprite.getMinV());
+			addVertex(vertexConsumer, matrices, 1,.5f, 1, sprite.getMaxU(), sprite.getMaxV());
+			addVertex(vertexConsumer, matrices, 0,.5f, 1, sprite.getMinU(), sprite.getMaxV());
+		}
+	}
+
+	private void addVertex(VertexConsumer renderer, MatrixStack stack, float x, float y, float z, float u, float v) {
 		renderer.vertex(stack.peek().getModel(),x,y,z)
 				.color(1.0f, 1.0f, 1.0f, 1.0f)
 				.texture(u, v)

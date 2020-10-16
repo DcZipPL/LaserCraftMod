@@ -43,12 +43,12 @@ public class LaserScreenHandler extends ScreenHandler {
 		//The player inventory
 		for (m = 0; m < 3; ++m) {
 			for (l = 0; l < 9; ++l) {
-				this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));
+				this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 102 + m * 18));
 			}
 		}
 		//The player Hotbar
 		for (m = 0; m < 9; ++m) {
-			this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 142));
+			this.addSlot(new Slot(playerInventory, m, 8 + m * 18, 160));
 		}
 
 	}

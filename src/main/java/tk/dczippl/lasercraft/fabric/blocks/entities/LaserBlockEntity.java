@@ -11,9 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.Direction;
+import tk.dczippl.lasercraft.fabric.blocks.LaserBlock;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
 
@@ -63,5 +66,9 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 	@Override
 	public boolean canPlayerUse(PlayerEntity player) {
 		return true;
+	}
+
+	public Direction getDirection() {
+		return world.getBlockState(pos).get(LaserBlock.FACING);
 	}
 }
