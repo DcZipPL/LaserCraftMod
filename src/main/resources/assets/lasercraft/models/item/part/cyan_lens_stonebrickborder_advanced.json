@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lasercraft:item/part/cyan_lens",
+    "layer1": "lasercraft:item/part/lens_border_stonebrick_advanced"
+  }
+}

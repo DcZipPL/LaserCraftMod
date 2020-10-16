@@ -6,22 +6,48 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import tk.dczippl.lasercraft.client.renderer.LaserBlockEntityRender;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 import tk.dczippl.lasercraft.fabric.blocks.entities.ModBlockEntities;
+import tk.dczippl.lasercraft.fabric.items.ModItems;
 import tk.dczippl.lasercraft.fabric.screens.LaserScreen;
 import tk.dczippl.lasercraft.fabric.screens.LensTableScreen;
 
 @Environment(EnvType.CLIENT)
 public class ClientLaserCraft implements ClientModInitializer {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	@Override
 	public void onInitializeClient() {
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity) -> {
+			if (stack.getOrCreateTag().contains("color")){
+				return stack.getTag().getInt("color");
+			}
+			return 0;
+		});
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity) -> {
+			if (stack.getOrCreateTag().contains("border")){
+				return stack.getTag().getInt("border");
+			}
+			return 0;
+		});
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity) -> {
+			if (stack.getOrCreateTag().contains("advanced")){
+				return stack.getTag().getInt("advanced");
+			}
+			return 0;
+		});
+
+		ModelPredicateProviderRegistry.get(ModItems.LENS, LaserCraft.idFrom("lens_item")).
+
 		ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
 			registry.register(LaserCraft.idFrom("block/part/white_lens_hole"));
 		});
