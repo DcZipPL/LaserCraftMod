@@ -2,11 +2,8 @@ package tk.dczippl.lasercraft.fabric.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -18,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import tk.dczippl.lasercraft.client.renderer.LaserParticle;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 
 public class LaserBlock extends BlockWithEntity {

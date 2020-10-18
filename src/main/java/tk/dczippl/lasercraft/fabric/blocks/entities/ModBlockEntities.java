@@ -13,7 +13,7 @@ public class ModBlockEntities {
 	public static BlockEntityType<?> LASER
 			= registerBlockEntity("laser_block",BlockEntityType.Builder.create(LaserBlockEntity::new, ModBlocks.LASER_BLOCK).build(null));
 	public static BlockEntityType<?> LENS_TABLE
-			= registerBlockEntity("lens_table",BlockEntityType.Builder.create(LaserBlockEntity::new, ModBlocks.LENS_TABLE).build(null));
+			= registerBlockEntity("lens_table",BlockEntityType.Builder.create(LensTableBlockEntity::new, ModBlocks.LENS_TABLE).build(null));
 
 	public static BlockEntityType<?> registerBlockEntity(String name, BlockEntityType<?> type)
 	{

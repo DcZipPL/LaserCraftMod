@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BeaconBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
@@ -58,18 +59,10 @@ public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity
 		addFace(sprite,matrices,vertexConsumer, entity.getDirection());
 		matrices.pop();
 
-		/*matrices.push();
-		matrices.translate(0,0,-0.501f);
-		addFace(sprite,matrices,vertexConsumer, Direction.SOUTH);
-		matrices.pop();
-		matrices.push();
-		matrices.translate(-0.501f,0,0);
-		addFace(sprite,matrices,vertexConsumer, WEST);
-		matrices.pop();
-		matrices.push();
-		matrices.translate(0.501f,0,0);
-		addFace(sprite,matrices,vertexConsumer, Direction.EAST);
-		matrices.pop();*/
+		float[] color = {1,1,1};
+		BeaconBlockEntityRenderer.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),tickDelta,1.0F,entity.getWorld().getTime(),0,16, color,0.2F, 0.25F
+		);
 	}
 
 	private void addFace(Sprite sprite, MatrixStack matrices, VertexConsumer vertexConsumer, Direction direction){
@@ -118,5 +111,10 @@ public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity
 				.light(0, 240)
 				.normal(1, 0, 0)
 				.next();
+	}
+
+	@Override
+	public boolean rendersOutsideBoundingBox(LaserBlockEntity blockEntity) {
+		return true;
 	}
 }

@@ -3,23 +3,14 @@ package tk.dczippl.lasercraft;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import tk.dczippl.lasercraft.client.renderer.LaserBlockEntityRender;
-import tk.dczippl.lasercraft.client.renderer.LaserParticle;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 import tk.dczippl.lasercraft.fabric.blocks.entities.ModBlockEntities;
 import tk.dczippl.lasercraft.fabric.items.ModItems;
@@ -29,16 +20,9 @@ import tk.dczippl.lasercraft.fabric.screens.LensTableScreen;
 @Environment(EnvType.CLIENT)
 public class ClientLaserCraft implements ClientModInitializer {
 
-	private static final DefaultParticleType testParticleType = FabricParticleTypes.simple();
-
 	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	@Override
 	public void onInitializeClient() {
-		ParticleFactoryRegistry.getInstance().register(testParticleType,(parameters, world, x, y, z, velocityX, velocityY, velocityZ) -> {
-			float[] f = {255,255,255};
-			return new LaserParticle(world, x, y, z,x+2, y, z,f,20,2,4,60);
-		});
-
 		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity) -> {
 			if (stack.getOrCreateTag().contains("color")){
 				return stack.getTag().getInt("color");
