@@ -5,6 +5,8 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A simple {@code Inventory} implementation with only default methods + an item list getter.
@@ -27,6 +29,12 @@ public interface ImplementedInventory extends Inventory {
 			@Override
 			public DefaultedList<ItemStack> getItems() {
 				return items;
+			}
+
+			@Override
+			public void onInvUpdate() {
+				Logger logger = LogManager.getLogger();
+				logger.info("i");
 			}
 
 			@Override
@@ -82,6 +90,7 @@ public interface ImplementedInventory extends Inventory {
 	 */
 	@Override
 	default ItemStack removeStack(int slot, int count) {
+		onInvUpdate();
 		ItemStack result = Inventories.splitStack(getItems(), slot, count);
 		if (!result.isEmpty()) {
 			markDirty();
@@ -95,8 +104,11 @@ public interface ImplementedInventory extends Inventory {
 	 */
 	@Override
 	default ItemStack removeStack(int slot) {
+		onInvUpdate();
 		return Inventories.removeStack(getItems(), slot);
 	}
+
+	void onInvUpdate();
 
 	/**
 	 * Replaces the current stack in an inventory slot with the provided stack.
@@ -107,6 +119,7 @@ public interface ImplementedInventory extends Inventory {
 	 */
 	@Override
 	default void setStack(int slot, ItemStack stack) {
+		onInvUpdate();
 		getItems().set(slot, stack);
 		if (stack.getCount() > getMaxCountPerStack()) {
 			stack.setCount(getMaxCountPerStack());
@@ -118,6 +131,7 @@ public interface ImplementedInventory extends Inventory {
 	 */
 	@Override
 	default void clear() {
+		onInvUpdate();
 		getItems().clear();
 	}
 

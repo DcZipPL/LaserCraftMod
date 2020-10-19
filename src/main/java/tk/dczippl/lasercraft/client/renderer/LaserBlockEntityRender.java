@@ -29,7 +29,6 @@ public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity
 
 	@Override
 	public void render(LaserBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-
 		matrices.push();
 		float x = 0;
 		float y = 0;
@@ -59,9 +58,45 @@ public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity
 		addFace(sprite,matrices,vertexConsumer, entity.getDirection());
 		matrices.pop();
 
-		float[] color = {1,1,1};
-		BeaconBlockEntityRenderer.renderLightBeam(
-				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),tickDelta,1.0F,entity.getWorld().getTime(),0,16, color,0.2F, 0.25F
+		float[] color = entity.getLensColor();
+		float inner = 0.11f + (entity.getStrength()/32f);
+		float outer = 0.16f + (entity.getStrength()/32f);
+		Direction laserHole = entity.getDirection().getOpposite();
+		if (laserHole == SOUTH)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, 90,0,false
+		);
+		if (laserHole == NORTH)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, -90,0,false
+		);
+		if (laserHole == DOWN)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, 0,0,false
+		);
+		if (laserHole == UP)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, 180,0,false
+		);
+		if (laserHole == WEST)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, 0,90,true
+		);
+		if (laserHole == EAST)
+		LaserBeam.renderLightBeam(
+				matrices,vertexConsumers,new Identifier("textures/entity/beacon_beam.png"),
+				tickDelta,1.0F,entity.getWorld().getTime(),
+				0,entity.getRange(), color, inner, outer, 0,-90,true
 		);
 	}
 

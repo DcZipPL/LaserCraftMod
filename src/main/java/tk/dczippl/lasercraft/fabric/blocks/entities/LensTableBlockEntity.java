@@ -60,6 +60,11 @@ public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHan
 	}
 
 	@Override
+	public void onInvUpdate() {
+
+	}
+
+	@Override
 	public boolean canPlayerUse(PlayerEntity player) {
 		return true;
 	}

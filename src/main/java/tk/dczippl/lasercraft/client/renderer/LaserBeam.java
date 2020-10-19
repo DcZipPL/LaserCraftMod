@@ -12,10 +12,18 @@ import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
 
 public class LaserBeam {
-	public static void renderLightBeam(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, Identifier identifier, float tickDelta, float g, long time, int i, int height, float[] color, float h, float k) {
+	public static void renderLightBeam(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, Identifier identifier, float tickDelta, float g,
+									   long time, int i, int height, float[] color, float innerSize, float borderSize, float rotationPitch, float rotationRoll, boolean rotationLock) {
 		int m = i + height;
 		matrixStack.push();
-		matrixStack.translate(0.5D, 0.0D, 0.5D);
+
+		matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(rotationPitch));
+		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(rotationRoll));
+		//matrixStack.translate(0.0D, 0.0D, -1.0D);
+
+		float rollOffset = rotationRoll < 90 && rotationLock ? 1 : 0;
+		float pitchOffset = rotationPitch < 90 ? 0 : 1;
+		matrixStack.translate(0.5D-rollOffset, 0.0D, 0.5D-pitchOffset);
 		float n = (float)Math.floorMod(time, 40L) + tickDelta;
 		float o = height < 0 ? n : -n;
 		float p = MathHelper.fractionalPart(o * 0.2F - (float)MathHelper.floor(o * 0.1F));
@@ -26,25 +34,25 @@ public class LaserBeam {
 		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(n * 2.25F - 45.0F));
 		float af = 0.0F;
 		float ai = 0.0F;
-		float aj = -h;
+		float aj = -innerSize;
 		float y = 0.0F;
 		float z = 0.0F;
-		float aa = -h;
+		float aa = -innerSize;
 		float an = 0.0F;
 		float ao = 1.0F;
 		float ap = -1.0F + p;
-		float aq = (float)height * g * (0.5F / h) + ap;
-		method_22741(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getBeaconBeam(identifier, false)), q, r, s, 1.0F, i, m, 0.0F, h, h, 0.0F, aj, 0.0F, 0.0F, aa, 0.0F, 1.0F, aq, ap);
+		float aq = (float)height * g * (0.5F / innerSize) + ap;
+		method_22741(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getBeaconBeam(identifier, true)), q, r, s, 0.3F, i, m, 0.0F, innerSize, innerSize, 0.0F, aj, 0.0F, 0.0F, aa, 0.0F, 1.0F, aq, ap);
 		matrixStack.pop();
-		af = -k;
-		float ag = -k;
-		ai = -k;
-		aj = -k;
+		af = -borderSize;
+		float ag = -borderSize;
+		ai = -borderSize;
+		aj = -borderSize;
 		an = 0.0F;
 		ao = 1.0F;
 		ap = -1.0F + p;
 		aq = (float)height * g + ap;
-		method_22741(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getBeaconBeam(identifier, true)), q, r, s, 0.125F, i, m, af, ag, k, ai, aj, k, k, k, 0.0F, 1.0F, aq, ap);
+		method_22741(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getBeaconBeam(identifier, true)), q, r, s, 0.125F, i, m, af, ag, borderSize, ai, aj, borderSize, borderSize, borderSize, 0.0F, 1.0F, aq, ap);
 		matrixStack.pop();
 	}
 

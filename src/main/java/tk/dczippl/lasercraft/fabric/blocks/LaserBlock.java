@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -36,12 +37,12 @@ public class LaserBlock extends BlockWithEntity {
 		if (!world.isClient) {
 			//This will call the createScreenHandlerFactory method from BlockWithEntity, which will return our blockEntity casted to
 			//a namedScreenHandlerFactory. If your block class does not extend BlockWithEntity, it needs to implement createScreenHandlerFactory.
-			/*NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+			NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
 
 			if (screenHandlerFactory != null) {
 				//With this call the server will request the client to open the appropriate Screenhandler
 				player.openHandledScreen(screenHandlerFactory);
-			}*/
+			}
 		}
 		return ActionResult.SUCCESS;
 	}
