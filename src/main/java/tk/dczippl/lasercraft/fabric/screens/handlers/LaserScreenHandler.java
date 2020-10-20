@@ -20,14 +20,14 @@ public class LaserScreenHandler extends ScreenHandler {
 	//The client will call the other constructor with an empty Inventory and the screenHandler will automatically
 	//sync this empty inventory with the inventory on the server.
 	public LaserScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(2));
+		this(syncId, playerInventory, new SimpleInventory(7));
 	}
 
 	//This constructor gets called from the BlockEntity on the server without calling the other constructor first, the server knows the inventory of the container
 	//and can therefore directly provide it as an argument. This inventory will then be synced to the client.
 	public LaserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
 		super(LaserCraft.LASER_SCREEN_HANDLER, syncId);
-		checkSize(inventory, 2);
+		checkSize(inventory, 7);
 		this.inventory = inventory;
 		//some inventories do custom logic when a player opens it.
 		inventory.onOpen(playerInventory.player);
@@ -37,8 +37,13 @@ public class LaserScreenHandler extends ScreenHandler {
 		int m;
 		int l;
 		//Our inventory
-		this.addSlot(new LaserSlot(LENS,inventory, 0, 8, 8));
-		this.addSlot(new LaserSlot(COIL,inventory, 1, 8, 62));
+		this.addSlot(new LaserSlot(LENS,inventory, 0, 17, 43));
+		this.addSlot(new LaserSlot(LENS,inventory, 1, 17, 79));
+		this.addSlot(new LaserSlot(LENS,inventory, 2, 62, 43));
+		this.addSlot(new LaserSlot(LENS,inventory, 3, 44, 61));
+		this.addSlot(new LaserSlot(LENS,inventory, 4, 80, 61));
+		this.addSlot(new LaserSlot(LENS,inventory, 5, 62, 79));
+		this.addSlot(new LaserSlot(COIL,inventory, 6, 62, 61));
 
 		//The player inventory
 		for (m = 0; m < 3; ++m) {

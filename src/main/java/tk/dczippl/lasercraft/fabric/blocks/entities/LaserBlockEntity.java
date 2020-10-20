@@ -1,10 +1,13 @@
 package tk.dczippl.lasercraft.fabric.blocks.entities;
 
-import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -19,16 +22,22 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tk.dczippl.lasercraft.fabric.blocks.LaserBlock;
 import tk.dczippl.lasercraft.fabric.items.LensItem;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
+import tk.dczippl.lasercraft.fabric.util.BreakData;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
+import tk.dczippl.lasercraft.fabric.util.LaserColor;
+
+import java.util.List;
 
 public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, Tickable, BlockEntityClientSerializable {
-	private int invsize = 2;
+	private int invsize = 7;
 	private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
 
 	public LaserBlockEntity() {
@@ -124,9 +133,9 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 					case 4:
 						return new float[]{0f, 1f, 0f};
 					case 5:
-						return new float[]{1f, 1f, 0f};
-					case 6:
 						return new float[]{1f, 0f, 1f};
+					case 6:
+						return new float[]{1f, 1f, 0f};
 					default:
 						return new float[]{0f, 0f, 0f};
 				}
@@ -135,25 +144,32 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 
 	@Override
 	public void tick() {
-		/*ItemStack lens = inventory.get(0);
-		Logger logger = LogManager.getLogger();
-		logger.info(lens.getItem().getName().getString()+lens.getOrCreateTag().toString());
-		onInvUpdate();*/
-	}
+		ItemStack lens = inventory.get(0);
+		if (lens.getItem() instanceof LensItem)
+			if (lens.getOrCreateTag().contains("color")){
+				int color = lens.getTag().getInt("color");
+				if (color == LaserColor.RED.ordinal()){
+					List<Entity> entities = world.getNonSpectatingEntities(
+							Entity.class,
+							new Box(
+									pos.add(1.5f,1.5f,1.5f),
+									pos.offset(getDirection().getOpposite(),getRange()).add(0.5f,0.5f,0.5f)
+							)
+						);
+					entities.forEach(entity -> {
+						entity.damage(DamageSource.IN_FIRE,getStrength()*0.5f+0.5f);
+					});
+					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(),getRange())).forEach(blockPos -> {
 
-	/*@Nullable
-	public BlockEntityUpdateS2CPacket toUpdatePacket() {
-		return new BlockEntityUpdateS2CPacket(this.pos, 999, this.toInitialChunkDataTag());
+						BreakData.getBlockBreaker(world).breakBlock(blockPos);
+						//world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+					});
+				}
+			}
 	}
-
-	public CompoundTag toInitialChunkDataTag() {
-		return this.toTag(new CompoundTag());
-	}*/
 
 	@Override
 	public void markDirty() {
-		//if (!world.isClient)
-		//	this.sync();
 		super.markDirty();
 		sendUpdate();
 	}
