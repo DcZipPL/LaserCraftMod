@@ -170,7 +170,7 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 				if (color == LaserColor.GREEN.ordinal()){
 					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(),getRange())).forEach(blockPos -> {
 						if (world.getBlockState(blockPos).getBlock() instanceof CropBlock){
-							((CropBlock)world.getBlockState(blockPos).getBlock()).grow((ServerWorld) world);
+							((CropBlock)world.getBlockState(blockPos).getBlock()).grow((ServerWorld) world,world.random,blockPos,world.getBlockState(blockPos));
 						}
 					});
 				}
