@@ -26,6 +26,9 @@
     ],
     "rei_plugins_v0": [
       "me.shedaniel.rei.plugin.DefaultPlugin"
+    ],
+    "cardinal-components-entity": [
+      "tk.dczippl.lasercraft.init.ModComponents"
     ]
   },
   "mixins": [
@@ -39,5 +42,11 @@
   },
   "suggests": {
     "flamingo": "*"
+  },
+
+  "custom": {
+    "cardinal-components": [
+      "lasercraft:breakdata"
+    ]
   }
 }

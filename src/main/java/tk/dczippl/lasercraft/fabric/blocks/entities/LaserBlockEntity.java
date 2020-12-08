@@ -3,6 +3,7 @@ package tk.dczippl.lasercraft.fabric.blocks.entities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CropBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
@@ -17,6 +18,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -163,6 +165,13 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 
 						BreakData.getBlockBreaker(world).breakBlock(blockPos);
 						//world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+					});
+				}
+				if (color == LaserColor.GREEN.ordinal()){
+					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(),getRange())).forEach(blockPos -> {
+						if (world.getBlockState(blockPos).getBlock() instanceof CropBlock){
+							((CropBlock)world.getBlockState(blockPos).getBlock()).grow((ServerWorld) world);
+						}
 					});
 				}
 			}
