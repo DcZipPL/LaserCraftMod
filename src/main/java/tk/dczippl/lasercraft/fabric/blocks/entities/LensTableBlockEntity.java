@@ -12,7 +12,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
-import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LensTableScreenHandler;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
 

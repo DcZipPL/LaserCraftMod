@@ -8,10 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import tk.dczippl.lasercraft.LaserCraft;
-import tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot;
-
-import static tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot.SlotType.COIL;
-import static tk.dczippl.lasercraft.fabric.screens.handlers.slots.LaserSlot.SlotType.LENS;
 
 public class LensTableScreenHandler extends ScreenHandler {
 	private final Inventory inventory;

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "c:yttrium_dusts"
+  },
+  "result": "lasercraft:yttrium_ingot",
+  "experience": 0.5,
+  "cookingtime": 200
+}

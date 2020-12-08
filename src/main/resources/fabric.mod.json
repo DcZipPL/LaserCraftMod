@@ -28,7 +28,10 @@
       "me.shedaniel.rei.plugin.DefaultPlugin"
     ],
     "cardinal-components-entity": [
-      "tk.dczippl.lasercraft.init.ModComponents"
+      "tk.dczippl.lasercraft.fabric.init.ModComponent"
+    ],
+    "rei_plugins": [
+      "tk.dczippl.lasercraft.plugin.rei.LaserCraftReiPlugin"
     ]
   },
   "mixins": [

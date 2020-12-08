@@ -2,24 +2,18 @@ package tk.dczippl.lasercraft.fabric.blocks.entities;
 
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Tickable;
@@ -27,8 +21,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import tk.dczippl.lasercraft.fabric.blocks.LaserBlock;
 import tk.dczippl.lasercraft.fabric.items.LensItem;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
@@ -148,31 +140,33 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 	public void tick() {
 		ItemStack lens = inventory.get(0);
 		if (lens.getItem() instanceof LensItem)
-			if (lens.getOrCreateTag().contains("color")){
+			if (lens.getOrCreateTag().contains("color")) {
 				int color = lens.getTag().getInt("color");
-				if (color == LaserColor.RED.ordinal()){
+				if (color == LaserColor.RED.ordinal()) {
 					List<Entity> entities = world.getNonSpectatingEntities(
 							Entity.class,
 							new Box(
-									pos.add(1.5f,1.5f,1.5f),
-									pos.offset(getDirection().getOpposite(),getRange()).add(0.5f,0.5f,0.5f)
+									pos.add(1.5f, 1.5f, 1.5f),
+									pos.offset(getDirection().getOpposite(), getRange()).add(0.5f, 0.5f, 0.5f)
 							)
-						);
+					);
 					entities.forEach(entity -> {
-						entity.damage(DamageSource.IN_FIRE,getStrength()*0.5f+0.5f);
+						entity.damage(DamageSource.IN_FIRE, getStrength() * 0.5f + 0.5f);
 					});
-					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(),getRange())).forEach(blockPos -> {
+					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(), getRange())).forEach(blockPos -> {
 
 						BreakData.getBlockBreaker(world).breakBlock(blockPos);
 						//world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
 					});
 				}
-				if (color == LaserColor.GREEN.ordinal()){
-					BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(),getRange())).forEach(blockPos -> {
-						if (world.getBlockState(blockPos).getBlock() instanceof CropBlock){
-							((CropBlock)world.getBlockState(blockPos).getBlock()).grow((ServerWorld) world,world.random,blockPos,world.getBlockState(blockPos));
-						}
-					});
+				if (!world.isClient) {
+					if (color == LaserColor.GREEN.ordinal()) {
+						BlockPos.iterate(pos.offset(getDirection().getOpposite()), pos.offset(getDirection().getOpposite(), getRange())).forEach(blockPos -> {
+							if (world.getBlockState(blockPos).getBlock() instanceof CropBlock) {
+								((CropBlock) world.getBlockState(blockPos).getBlock()).grow((ServerWorld) world, world.random, blockPos, world.getBlockState(blockPos));
+							}
+						});
+					}
 				}
 			}
 	}

@@ -1,6 +1,5 @@
 package tk.dczippl.lasercraft.fabric.blocks.entities;
 
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
