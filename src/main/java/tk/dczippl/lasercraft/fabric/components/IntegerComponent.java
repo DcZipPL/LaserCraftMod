@@ -1,4 +1,4 @@
-package tk.dczippl.lasercraft.components;
+package tk.dczippl.lasercraft.fabric.components;
 
 import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 

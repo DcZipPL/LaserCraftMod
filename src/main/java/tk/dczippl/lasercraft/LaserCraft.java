@@ -1,16 +1,12 @@
 package tk.dczippl.lasercraft;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import tk.dczippl.lasercraft.client.renderer.LaserBlockEntityRender;
+import tk.dczippl.lasercraft.fabric.client.renderer.LaserBlockEntityRender;
 import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 import tk.dczippl.lasercraft.fabric.blocks.entities.ModBlockEntities;

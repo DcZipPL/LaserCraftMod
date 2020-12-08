@@ -1,4 +1,4 @@
-package tk.dczippl.lasercraft.client.renderer;
+package tk.dczippl.lasercraft.fabric.client.renderer;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;

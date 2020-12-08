@@ -1,12 +1,10 @@
 package tk.dczippl.lasercraft.fabric.util;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentV3;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tk.dczippl.lasercraft.components.IntegerComponent;
-import tk.dczippl.lasercraft.fabric.init.ModComponent;
+import tk.dczippl.lasercraft.fabric.components.IntegerComponent;
 
 public class BreakData {
 
