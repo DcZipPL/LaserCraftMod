@@ -1,13 +1,18 @@
 package tk.dczippl.lasercraft.plugin.rei;
 
+import com.google.common.collect.Lists;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeHelper;
 import me.shedaniel.rei.api.plugins.REIPluginV0;
+import me.shedaniel.rei.utils.CollectionUtils;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
+import tk.dczippl.lasercraft.LaserCraft;
 import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
 
 public class LaserCraftReiPlugin implements REIPluginV0 {
-	public static final Identifier PLUGIN = new Identifier("lasercraft", "lasercraft_plugin");
+	public static final Identifier PLUGIN = new Identifier(LaserCraft.MOD_ID, "lasercraft_plugin");
 
 	public LaserCraftReiPlugin(){
 
@@ -25,8 +30,7 @@ public class LaserCraftReiPlugin implements REIPluginV0 {
 
 	@Override
 	public void registerRecipeDisplays(RecipeHelper recipeHelper) {
-		recipeHelper.registerRecipes(LensTableCategory.ID, LensTableRecipe.class, LensTableRecipeWrapper::new);
-		recipeHelper.registerDisplay(new LensDisplay());
+		recipeHelper.registerDisplay(new LensTableDisplay(CollectionUtils.map(Lists.newArrayList(ItemTags.getTagGroup().getTag(new Identifier(LaserCraft.MOD_ID,"lens_modifier")).values()), ItemStack::new)));
 	}
 
 	@Override

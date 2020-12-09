@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:diamond",
+    "minecraft:redstone_dust",
+    "lasercraft:redstone_crystal",
+    "lasercraft:yttrium_dust"
+  ]
+}

@@ -20,7 +20,7 @@ import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
 
 import java.util.List;
 
-public class LensTableCategory implements RecipeCategory<LensDisplay> {
+public class LensTableCategory implements RecipeCategory<LensTableDisplay> {
 	public static Identifier ID = new Identifier("lasercraft","lenstable");
 
 	@Override
@@ -39,7 +39,7 @@ public class LensTableCategory implements RecipeCategory<LensDisplay> {
 	}
 
 	@Override
-	public @NotNull List<Widget> setupDisplay(LensDisplay recipeDisplay, Rectangle bounds) {
+	public @NotNull List<Widget> setupDisplay(LensTableDisplay recipeDisplay, Rectangle bounds) {
 		Point startPoint = new Point(bounds.getCenterX() - 41, bounds.getCenterY() - 17);
 		String burnItems = "none";//String.valueOf(recipeDisplay.getFuelTime());
 		List<Widget> widgets = Lists.newArrayList();
@@ -52,7 +52,7 @@ public class LensTableCategory implements RecipeCategory<LensDisplay> {
 	}
 
 	@Override
-	public @NotNull RecipeEntry getSimpleRenderer(LensDisplay recipe) {
+	public @NotNull RecipeEntry getSimpleRenderer(LensTableDisplay recipe) {
 		Slot slot = Widgets.createSlot(new Point(0, 0)).entries(recipe.getInputEntries().get(0)).disableBackground().disableHighlight();
 		String burnItems = "none0";
 		return new RecipeEntry() {
