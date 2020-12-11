@@ -152,6 +152,8 @@ dependencies {
 	modImplementation "TechReborn:TechReborn-1.16:3.7.1+build.180"
 
 	modRuntime "curse.maven:applied-energistics-2:3117933"
+
+	testCompile "junit:junit:4.11"
 }
 
 processResources {
