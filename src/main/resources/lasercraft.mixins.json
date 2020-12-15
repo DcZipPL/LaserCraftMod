@@ -4,6 +4,8 @@
   "package": "tk.dczippl.lasercraft.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ResourceReloaderMixin",
+    "SplashScreenMixin"
   ],
   "client": [
   ],

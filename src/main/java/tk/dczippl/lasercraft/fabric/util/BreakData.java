@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.components.IntegerComponent;
+import tk.dczippl.lasercraft.fabric.init.ModComponent;
 
 public class BreakData {
 
@@ -60,11 +61,10 @@ public class BreakData {
 		}
 
 		public void breakBlock(BlockPos position){
-			/*if (ModComponent.BREAKDATA.get(position).getValue() == 20) {
-				ModComponent.BREAKDATA.get(position).setValue(0);*/
-			if (world.random.nextInt(20)==2)
+			if (ModComponent.BREAKDATA.get(position).getValue() == 20) {
+				ModComponent.BREAKDATA.get(position).setValue(0);
 				world.breakBlock(position, true);
-			//} else ModComponent.BREAKDATA.get(position).setValue(ModComponent.BREAKDATA.get(position).getValue()+1);
+			} else ModComponent.BREAKDATA.get(position).setValue(ModComponent.BREAKDATA.get(position).getValue()+1);
 		}
 	}
 }
