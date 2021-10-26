@@ -14,15 +14,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LensTableDisplay implements RecipeDisplay {
-	private final List<ItemStack> inputs;
+	private final List<ItemStack> border;
+	private final List<ItemStack> modifier;
+	private final List<ItemStack> glass;
 
-	public LensTableDisplay(List<ItemStack> inputs) {
-		this.inputs = inputs;
+	public LensTableDisplay(List<ItemStack> border, List<ItemStack> modifier, List<ItemStack> glass) {
+		this.border = border;
+		this.modifier = modifier;
+		this.glass = glass;
 	}
 
 	@Override
 	public @NotNull List<List<EntryStack>> getInputEntries() {
-		return Collections.singletonList(EntryStack.ofItemStacks(inputs));
+		return Lists.newArrayList(EntryStack.ofItemStacks(border),EntryStack.ofItemStacks(modifier),EntryStack.ofItemStacks(glass));
+	}
+
+	@Override
+	public @NotNull List<List<EntryStack>> getRequiredEntries() {
+		return getInputEntries();
+	}
+
+	@Override
+	public @NotNull List<List<EntryStack>> getResultingEntries() {
+		return Collections.singletonList(Collections.singletonList(EntryStack.create(new ItemStack(ModItems.LENS))));
 	}
 
 	@Override

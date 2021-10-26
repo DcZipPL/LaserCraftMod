@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -15,7 +16,7 @@ import tk.dczippl.lasercraft.fabric.blocks.entities.LensTableBlockEntity;
 
 public class LensTableBlock extends BlockWithEntity {
 	public LensTableBlock() {
-		super(Settings.of(Material.METAL));
+		super(Settings.of(Material.METAL).requiresTool().sounds(BlockSoundGroup.METAL).strength(1.0F, 6.0F));
 	}
 
 	@Override

@@ -30,7 +30,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(ResourceReloader.class)
-public class ResourceReloaderMixin<S> implements SplashScreenProgressProvider {
+public class ResourceReloaderMixin<S> {
 
 	@Mutable
 	@Final
@@ -76,16 +76,8 @@ public class ResourceReloaderMixin<S> implements SplashScreenProgressProvider {
 		//ci.setReturnValue((f-6)/(g-6));
 	}
 
-	@Inject(at = @At(value = "HEAD"), method = "whenComplete()Ljava/util/concurrent/CompletableFuture;")
-	public void whenComplete(CallbackInfoReturnable<CompletableFuture<Unit>> cir) {
-		this.applyStageFuture.thenApply((list) -> {Logger logger = LogManager.getLogger();
-			logger.warn("Complete: "+list.get(0));
-			return Unit.INSTANCE;
-		});
-	}
-
-	@Override
+	/*@Override
 	public int stichingProgress() {
 		return 0;
-	}
+	}*/
 }

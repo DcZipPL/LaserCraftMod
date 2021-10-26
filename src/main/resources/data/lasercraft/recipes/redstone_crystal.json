@@ -1,0 +1,20 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+			"RRR",
+			"RYR",
+			"RRR"
+	],
+	"key": {
+			"Y": {
+				"item": "lasercraft:yttrium_ingot"
+			},
+			"R": {
+				"item": "minecraft:redstone"
+			}
+	},
+	"result": {
+			"item": "lasercraft:redstone_crystal",
+			"count": 1
+	}
+}

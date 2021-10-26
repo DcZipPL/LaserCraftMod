@@ -15,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
+import tk.dczippl.lasercraft.fabric.init.ModTags;
 import tk.dczippl.lasercraft.fabric.items.ModItems;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LensTableScreenHandler;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
@@ -90,7 +91,7 @@ public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHan
 
 	private int getRange() {
 		if (ModTags.LENS_GLASS.contains(inventory.get(3).getItem())){
-			return LensValues.getGlassFromJson();
+			//return LensValues.getGlassFromJson();
 		}
 		return 0;
 	}

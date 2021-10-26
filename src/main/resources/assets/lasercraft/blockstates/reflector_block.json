@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "lasercraft:block/laser_block" }
+    }
+}

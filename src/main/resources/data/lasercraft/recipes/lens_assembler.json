@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "YCY",
+    " M "
+  ],
+  "key": {
+		"Y": {
+      "item": "lasercraft:yttrium_plate"
+    },
+    "C": {
+      "item": "techreborn:electronic_circuit"
+    },
+    "#": {
+      "item": "minecraft:crafting_table"
+    },
+    "M": {
+      "item": "techreborn:basic_machine_frame"
+    }
+  },
+  "result": {
+    "item": "lasercraft:lens_assembler"
+  }
+}

@@ -1,0 +1,26 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+			"ICI",
+			"SRS",
+			"ISI"
+	],
+	"key": {
+			"I": {
+				"item": "minecraft:iron_ingot"
+			},
+			"S": {
+				"item": "minecraft:stone"
+			},
+			"C": {
+				"item": "minecraft:crafting_table"
+			},
+			"R": {
+				"item": "lasercraft:redstone_crystal"
+			}
+	},
+	"result": {
+			"item": "lasercraft:lens_table",
+			"count": 1
+	}
+}

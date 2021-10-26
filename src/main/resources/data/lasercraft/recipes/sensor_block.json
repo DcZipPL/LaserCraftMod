@@ -1,0 +1,23 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+			"GGG",
+			"CRC",
+			"GGG"
+	],
+	"key": {
+			"G": {
+				"item": "minecraft:glass"
+			},
+			"C": {
+				"item": "minecraft:cobblestone"
+			},
+			"R": {
+				"item": "lasercraft:redstone_crystal"
+			}
+	},
+	"result": {
+			"item": "lasercraft:sensor_block",
+			"count": 1
+	}
+}

@@ -1,9 +1,10 @@
 {
   "parent": "block/cube",
   "textures": {
+      "particle": "lasercraft:block/laser_block",
       "down": "lasercraft:block/laser_block",
       "up": "lasercraft:block/laser_block",
-      "north": "lasercraft:block/laser_block_l",
+      "north": "lasercraft:block/laser_block_s",
       "east": "lasercraft:block/laser_block",
       "south": "lasercraft:block/laser_block",
       "west": "lasercraft:block/laser_block"

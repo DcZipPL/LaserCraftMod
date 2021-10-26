@@ -1,4 +1,4 @@
-package tk.dczippl.lasercraft.fabric;
+package tk.dczippl.lasercraft.fabric.util;
 
 import net.fabricmc.loader.FabricLoader;
 

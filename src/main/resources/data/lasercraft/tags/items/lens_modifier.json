@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:diamond",
-    "minecraft:redstone_dust",
+    "minecraft:redstone",
     "lasercraft:redstone_crystal",
     "lasercraft:yttrium_dust"
   ]

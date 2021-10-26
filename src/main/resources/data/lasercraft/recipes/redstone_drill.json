@@ -1,0 +1,25 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+			"RII",
+			" BS"
+	],
+	"key": {
+			"R": {
+				"item": "lasercraft:redstone_crystal"
+			},
+			"B": {
+				"item": "minecraft:stone_button"
+			},
+			"S": {
+				"item": "minecraft:stick"
+			},
+			"I": {
+				"item": "minecraft:iron_ingot"
+			}
+	},
+	"result": {
+			"item": "lasercraft:redstone_drill",
+			"count": 1
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+			" T ",
+			"IRI",
+			" I "
+	],
+	"key": {
+			"T": {
+				"item": "minecraft:redstone_torch"
+			},
+			"R": {
+				"item": "lasercraft:redstone_crystal"
+			},
+			"I": {
+				"item": "minecraft:iron_ingot"
+			}
+	},
+	"result": {
+			"item": "lasercraft:laser_remote",
+			"count": 1
+	}
+}

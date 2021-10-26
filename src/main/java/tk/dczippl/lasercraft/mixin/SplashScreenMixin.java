@@ -1,6 +1,8 @@
 package tk.dczippl.lasercraft.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.FontManager;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.SplashScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceReloadMonitor;
@@ -13,7 +15,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tk.dczippl.lasercraft.fabric.util.ModifiedProgress;
 
 @Mixin(SplashScreen.class)
 public class SplashScreenMixin {
@@ -36,6 +37,9 @@ public class SplashScreenMixin {
 
 	@Inject(at = @At(value = "TAIL"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V")
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		MinecraftClient.getInstance().textRenderer.draw(matrices, String.valueOf(reloadMonitor.getProgress()),10,10,0xFFFFFF);
+		int i = MinecraftClient.getInstance().getWindow().getScaledWidth();
+		double d = Math.min((double)MinecraftClient.getInstance().getWindow().getScaledWidth() * 0.75D, (double)MinecraftClient.getInstance().getWindow().getScaledHeight()) * 0.25D;
+		double e = d * 4.0D;
+		MinecraftClient.getInstance().textRenderer.draw(matrices, Math.round(reloadMonitor.getProgress() * 10000f) / 100f +"%",i / 2 - 10, 10,0xFFFFFF);
 	}
 }

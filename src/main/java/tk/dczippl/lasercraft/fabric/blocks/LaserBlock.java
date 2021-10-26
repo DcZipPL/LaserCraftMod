@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -23,7 +24,7 @@ public class LaserBlock extends BlockWithEntity {
 	public static DirectionProperty FACING = Properties.FACING;
 
 	public LaserBlock() {
-		super(Settings.of(Material.STONE));
+		super(Settings.of(Material.STONE).requiresTool().sounds(BlockSoundGroup.STONE).strength(1.5F, 6.0F));
 		this.setDefaultState(this.stateManager.getDefaultState().with(LaserBlock.FACING,Direction.NORTH));
 	}
 

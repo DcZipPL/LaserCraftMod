@@ -7,15 +7,18 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import tk.dczippl.lasercraft.LaserCraft;
-import tk.dczippl.lasercraft.fabric.ExtendedCompatibility;
+import tk.dczippl.lasercraft.fabric.util.ExtendedCompatibility;
 import tk.dczippl.lasercraft.fabric.init.ModCreativeTabs;
 import tk.dczippl.lasercraft.fabric.items.ModItems;
+import tk.dczippl.lasercraft.plugin.techreborn.LensAssemblerBlock;
 
 public class ModBlocks {
 
+	public static final Block SENSOR_BLOCK = registerBlock("sensor_block", new LaserBlock());
+	public static final Block REFLECTOR_BLOCK = registerBlock("reflector_block", new LaserBlock());
 	public static final Block LASER_BLOCK = registerBlock("laser_block", new LaserBlock());
 	public static final Block LENS_TABLE = registerBlock("lens_table", new LensTableBlock());
-	public static final Block LENS_ASSEMBLER = registerMachine("lens_assembler");
+	public static final Block LENS_ASSEMBLER = registerMachine("lens_assembler", new LensAssemblerBlock());
 
 	public static void register() {}
 
@@ -26,9 +29,11 @@ public class ModBlocks {
 		return block;
 	}
 
-	private static Block registerMachine(String name) {
-		if (ExtendedCompatibility.isTechRebornPresent())
-			return new LensAssemblerBlock();
+	private static Block registerMachine(String name, Block block) {
+		if (ExtendedCompatibility.isTechRebornPresent()){
+			registerBlock(name,block);
+			return block;
+		}
 		else return Blocks.AIR;
 	}
 }

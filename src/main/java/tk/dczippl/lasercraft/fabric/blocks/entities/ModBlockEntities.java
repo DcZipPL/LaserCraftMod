@@ -6,8 +6,9 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import tk.dczippl.lasercraft.LaserCraft;
-import tk.dczippl.lasercraft.fabric.ExtendedCompatibility;
+import tk.dczippl.lasercraft.fabric.util.ExtendedCompatibility;
 import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
+import tk.dczippl.lasercraft.plugin.techreborn.LensAssemblerBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -19,7 +20,7 @@ public class ModBlockEntities {
 	public static BlockEntityType<?> LENS_TABLE
 			= registerBlockEntity("lens_table",LensTableBlockEntity::new, ModBlocks.LENS_TABLE);
 	public static final BlockEntityType<?> LENS_ASSEMBLER
-			= registerBlockEntityIfTechrebornPresent("lens_assembler",LensAssemblerBlockEntity::new, ModBlocks.LENS_TABLE);
+			= registerBlockEntityIfTechrebornPresent("lens_assembler.json", LensAssemblerBlockEntity::new, ModBlocks.LENS_TABLE);
 
 	private static <T extends BlockEntity> BlockEntityType<?> registerBlockEntityIfTechrebornPresent(String name, Supplier<? extends T> supplier, Block... blocks) {
 		if (ExtendedCompatibility.isTechRebornPresent())

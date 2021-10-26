@@ -1,17 +1,13 @@
-package tk.dczippl.lasercraft.fabric.screens;
+package tk.dczippl.lasercraft.plugin.techreborn;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.util.Identifier;
 import reborncore.client.gui.builder.GuiBase;
 import reborncore.client.gui.guibuilder.GuiBuilder;
 import reborncore.client.screen.builder.BuiltScreenHandler;
-import reborncore.common.network.NetworkManager;
-import techreborn.packets.ServerboundPackets;
-import tk.dczippl.lasercraft.fabric.blocks.entities.LensAssemblerBlockEntity;
 
 public class LensAssemblerScreen extends GuiBase<BuiltScreenHandler> {
 	static final Identifier RECIPE_BOOK_TEXTURE = new Identifier("textures/gui/recipe_book.png");

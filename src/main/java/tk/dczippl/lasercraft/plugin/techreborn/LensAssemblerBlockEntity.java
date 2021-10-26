@@ -1,4 +1,4 @@
-package tk.dczippl.lasercraft.fabric.blocks.entities;
+package tk.dczippl.lasercraft.plugin.techreborn;
 
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +17,7 @@ import reborncore.common.util.RebornInventory;
 import team.reborn.energy.EnergySide;
 import techreborn.blockentity.machine.tier1.AutoCraftingTableBlockEntity;
 import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
+import tk.dczippl.lasercraft.fabric.blocks.entities.ModBlockEntities;
 
 public class LensAssemblerBlockEntity extends PowerAcceptorBlockEntity implements IToolDrop, InventoryProvider, BuiltScreenHandlerProvider {
 	public RebornInventory<AutoCraftingTableBlockEntity> inventory = new RebornInventory(11, "LensAssemblerBlockEntity", 64, this);

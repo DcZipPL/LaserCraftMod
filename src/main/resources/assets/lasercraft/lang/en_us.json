@@ -1,0 +1,22 @@
+{
+  "item.lasercraft.redstone_crystal": "Redstone Crystal",
+  "item.lasercraft.laser_remote": "Handheld Sensor",
+  "item.lasercraft.redstone_drill": "Redstone Drill",
+  "item.lasercraft.yttrium_dust": "Yttrium Dust",
+  "item.lasercraft.yttrium_small_dust": "Yttrium Small Dust",
+  "item.lasercraft.yttrium_plate": "Yttrium Plate",
+  "item.lasercraft.yttrium_ingot": "Yttrium Ingot",
+  "item.lasercraft.lens": "Lens",
+
+  "block.lasercraft.laser_block": "Laser Block",
+  "block.lasercraft.reflector_block": "Reflector Block",
+  "block.lasercraft.sensor_block": "Sensor Block",
+  "block.lasercraft.lens_table": "Lens Table",
+  "block.lasercraft.lens_assembler": "Lens Assembler",
+
+  "category.lasercraft.lenstable": "Lens Table",
+
+  "tooltip.lasercraft.color": "Color: ",
+  "tooltip.lasercraft.strength": "Strength: ",
+  "tooltip.lasercraft.range": "Range: "
+}
