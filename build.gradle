@@ -12,10 +12,6 @@ group = project.maven_group
 
 repositories {
 	maven {
-		name = "Ladysnake Libs"
-		url = "https://dl.bintray.com/ladysnake/libs"
-	}
-	maven {
 		url = "https://www.cursemaven.com"
 		content {
 			includeGroup "curse.maven"
@@ -23,17 +19,10 @@ repositories {
 	}
 	maven {
 		name = "Modmuss50"
-		url = "http://maven.modmuss50.me/"
+		url = "https://maven.modmuss50.me/"
 	}
-	// for Cardinal Components
-	maven {
-		name = "Ladysnake Libs"
-		url = "https://dl.bintray.com/ladysnake/libs"
-		content {
-			includeGroup "io.github.onyxstudios"
-			includeGroup "io.github.onyxstudios.Cardinal-Components-API"
-		}
-	}
+	// for REI
+	maven { url "https://maven.shedaniel.me" }
 	// for Patchouli
 	maven {
 		url 'https://maven.blamejared.com'
@@ -49,70 +38,17 @@ repositories {
 			includeGroup "alexiil.mc.lib"
 		}
 	}
-	// for HWYLA
-	maven {
-		url "https://maven.tehnut.info"
-		content {
-			includeGroup "mcp.mobius.waila"
-		}
-	}
-	// for AE2
-	maven {
-		name "Modmaven"
-		url "https://modmaven.dev"
-		content {
-			includeGroup "appeng"
-		}
-	}
-	// for Astromine, KJS and Indrev, and api-provider
-	maven {
-		name 'Jitpack for MI'
-		url 'https://jitpack.io'
-		content {
-			includeGroup "com.github.KubeJS-Mods"
-			includeGroup "com.github.Mixinors.Astromine"
-			includeGroup "com.github.GabrielOlvH"
-			includeGroup "com.github.Technici4n"
-			/* To build indrev */
-			includeGroup "com.github.Draylar"
-			/* To build astromine */
-			includeGroup "com.github.vini2003"
-			includeGroup "com.github.Shnupbups"
-		}
-	}
-	// to build indrev
-	maven {
-		name = "CottonMC"
-		url = "https://server.bbkr.space/artifactory/libs-release"
-		content {
-			includeGroup "io.github.cottonmc"
-		}
-	}
-	// to build Astromine
-	maven {
-		name = "Earthcomputer"
-		url = "https://dl.bintray.com/earthcomputer/mods"
-		content {
-			includeGroup "net.earthcomputer"
-		}
-	}
-	maven {
-		name = "Wrenchable"
-		url = "https://dl.bintray.com/zundrel/wrenchable"
-		content {
-			includeGroup "com.zundrel"
-		}
-	}
-	maven {
-		name = "dblsaiko"
-		url = "https://maven.dblsaiko.net/"
-	}
 	maven {
 		name = "Technici4n"
 		url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
 		content {
 			includeGroup "net.fabricmc.fabric-api"
 		}
+	}
+	// for ModMenu
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
 	}
 }
 
@@ -125,35 +61,18 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Replace modImplementation with modApi if you expose components in your own API
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.7.1"
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:2.7.1"
-	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:2.7.1"
-	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional)
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.7.1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-util:2.7.1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-chunk:2.7.1"
-
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
-	modCompile "me.shedaniel:RoughlyEnoughItems:5.8.0"
+	modApi "me.shedaniel:RoughlyEnoughItems-api-fabric:6.0.307-alpha"
+	include "me.shedaniel:RoughlyEnoughItems-fabric:6.0.307-alpha"
 
-	modImplementation "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
-	modImplementation "io.github.prospector:modmenu:${project.mod_menu_version}"
-	modImplementation "com.github.Technici4n:KubeJS-Fabric:${project.kjs_commit}"
-	include "com.github.Technici4n:KubeJS-Fabric:${project.kjs_commit}"
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 	include "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 	modImplementation "teamreborn:energy:${project.tr_energy_version}"
 	include "teamreborn:energy:${project.tr_energy_version}"
 	modApi "alexiil.mc.lib:libblockattributes-all:${project.lba_version}"
 	include "alexiil.mc.lib:libblockattributes-all:${project.lba_version}"
-
-	modImplementation "TechReborn:TechReborn-1.16:3.7.1+build.180"
-
-	modRuntime "curse.maven:applied-energistics-2:3117933"
-
-	testCompile "junit:junit:4.11"
 }
 
 processResources {
