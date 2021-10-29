@@ -18,21 +18,21 @@ public class ClientLaserCraft implements ClientModInitializer {
 	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	@Override
 	public void onInitializeClient() {
-		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity) -> {
-			if (stack.getOrCreateTag().contains("color")){
-				return stack.getTag().getInt("color");
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("color"),(stack, world, entity, seed) -> {
+			if (stack.getOrCreateNbt().contains("color")){
+				return stack.getNbt().getInt("color");
 			}
 			return 0;
 		});
-		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("border"),(stack, world, entity) -> {
-			if (stack.getOrCreateTag().contains("border")){
-				return stack.getTag().getInt("border");
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("border"),(stack, world, entity, seed) -> {
+			if (stack.getOrCreateNbt().contains("border")){
+				return stack.getNbt().getInt("border");
 			}
 			return 0;
 		});
-		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("mode"),(stack, world, entity) -> {
-			if (stack.getOrCreateTag().contains("mode")){
-				return stack.getTag().getInt("mode");
+		FabricModelPredicateProviderRegistry.register(ModItems.LENS, new Identifier("mode"),(stack, world, entity, seed) -> {
+			if (stack.getOrCreateNbt().contains("mode")){
+				return stack.getNbt().getInt("mode");
 			}
 			return 0;
 		});

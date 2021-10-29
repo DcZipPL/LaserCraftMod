@@ -1,9 +1,9 @@
 package tk.dczippl.lasercraft.fabric.util;
 
-import net.fabricmc.loader.FabricLoader;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class ExtendedCompatibility {
 	public static boolean isTechRebornPresent(){
-		return FabricLoader.INSTANCE.isModLoaded("techreborn");
+		return FabricLoader.getInstance().isModLoaded("techreborn");
 	}
 }

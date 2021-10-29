@@ -19,6 +19,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LaserBlockEntity;
 
+import javax.annotation.Nullable;
+
 public class LaserBlock extends BlockWithEntity {
 
 	public static DirectionProperty FACING = Properties.FACING;
@@ -68,10 +70,11 @@ public class LaserBlock extends BlockWithEntity {
 		//With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
 		return BlockRenderType.MODEL;
 	}
-
+	
+	@Nullable
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return new LaserBlockEntity();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new LaserBlockEntity(pos, state);
 	}
 
 	@Override

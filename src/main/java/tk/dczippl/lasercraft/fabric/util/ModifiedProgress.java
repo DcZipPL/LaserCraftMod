@@ -1,13 +1,9 @@
 package tk.dczippl.lasercraft.fabric.util;
 
-import net.fabricmc.loader.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.resource.ResourceReloadListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
-import java.util.Set;
 
 public class ModifiedProgress {
 	private static int p = 0;
@@ -23,6 +19,6 @@ public class ModifiedProgress {
 			logger.info("L: "+p);
 		}
 
-		return Math.max(p/100f/FabricLoader.INSTANCE.getAllMods().size(),1f);
+		return Math.max(p/100f/net.fabricmc.loader.api.FabricLoader.getInstance().getAllMods().size(),1f);
 	}
 }

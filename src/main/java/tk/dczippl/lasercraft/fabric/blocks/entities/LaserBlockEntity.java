@@ -4,23 +4,24 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.blocks.LaserBlock;
 import tk.dczippl.lasercraft.fabric.items.LensItem;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LaserScreenHandler;
@@ -30,12 +31,13 @@ import tk.dczippl.lasercraft.fabric.util.LaserColor;
 
 import java.util.List;
 
-public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, Tickable, BlockEntityClientSerializable {
+@SuppressWarnings("ConstantConditions")
+public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, BlockEntityTicker<LaserBlockEntity>, BlockEntityClientSerializable {
 	private int invsize = 7;
 	private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
 
-	public LaserBlockEntity() {
-		super(ModBlockEntities.LASER);
+	public LaserBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.LASER, pos, state);
 	}
 
 	//These Methods are from the NamedScreenHandlerFactory Interface
@@ -55,14 +57,14 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 	}
 
 	@Override
-	public void fromTag(BlockState state, CompoundTag tag) {
-		super.fromTag(state, tag);
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
 		fromClientTag(tag);
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
 		toClientTag(tag);
 		return tag;
 	}
@@ -79,7 +81,7 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 		this.markDirty();
 		sendUpdate();
 	}
-
+	
 	@Override
 	public void sync() {
 		markDirty();
@@ -98,24 +100,24 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 	public int getStrength(){
 		ItemStack lens = inventory.get(0);
 		if (lens.getItem() instanceof LensItem)
-			if (lens.getOrCreateTag().contains("strength"))
-				return lens.getTag().getInt("strength");
+			if (lens.getOrCreateNbt().contains("strength"))
+				return lens.getNbt().getInt("strength");
 		return 0; //lensStrength
 	}
 
 	public int getRange(){
 		ItemStack lens = inventory.get(0);
 		if (lens.getItem() instanceof LensItem)
-			if (lens.getOrCreateTag().contains("range"))
-				return lens.getTag().getInt("range");
+			if (lens.getOrCreateNbt().contains("range"))
+				return lens.getNbt().getInt("range");
 		return 8; //lensRange
 	}
 
 	public float[] getLensColor() {
 		ItemStack lens = inventory.get(0);
 		if (lens.getItem() instanceof LensItem)
-			if (lens.getOrCreateTag().contains("color"))
-				switch (lens.getTag().getInt("color")){
+			if (lens.getOrCreateNbt().contains("color"))
+				switch (lens.getNbt().getInt("color")){
 					case 0:
 						return new float[]{1f, 1f, 1f};
 					case 1:
@@ -135,13 +137,14 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 				}
 		return new float[]{1f, 1f, 1f};
 	}
-
+	
+	
 	@Override
-	public void tick() {
+	public void tick(World world, BlockPos pos, BlockState state, LaserBlockEntity blockEntity) {
 		ItemStack lens = inventory.get(0);
 		if (lens.getItem() instanceof LensItem)
-			if (lens.getOrCreateTag().contains("color")) {
-				int color = lens.getTag().getInt("color");
+			if (lens.getOrCreateNbt().contains("color")) {
+				int color = lens.getNbt().getInt("color");
 				if (color == LaserColor.RED.ordinal()) {
 					List<Entity> entities = world.getNonSpectatingEntities(
 							Entity.class,
@@ -183,17 +186,17 @@ public class LaserBlockEntity extends BlockEntity implements NamedScreenHandlerF
 			(this.world).updateListeners(this.pos, state, state, 3);
 		}
 	}
-
+	
 	@Override
-	public void fromClientTag(CompoundTag compoundTag) {
+	public void fromClientTag(NbtCompound tag) {
 		this.inventory.clear();
 		inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
-		Inventories.fromTag(compoundTag, this.inventory);
+		Inventories.readNbt(tag, this.inventory);
 	}
-
+	
 	@Override
-	public CompoundTag toClientTag(CompoundTag compoundTag) {
-		Inventories.toTag(compoundTag, this.inventory);
-		return compoundTag;
+	public NbtCompound toClientTag(NbtCompound tag) {
+		/*tag = */Inventories.writeNbt(tag, this.inventory);
+		return tag;
 	}
 }

@@ -5,11 +5,11 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
 public class LaserBeam {
 	public static void renderLightBeam(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, Identifier identifier, float tickDelta, float g,
@@ -17,8 +17,8 @@ public class LaserBeam {
 		int m = i + height;
 		matrixStack.push();
 
-		matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(rotationPitch));
-		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(rotationRoll));
+		matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(rotationPitch));
+		matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(rotationRoll));
 		//matrixStack.translate(0.0D, 0.0D, -1.0D);
 
 		float rollOffset = rotationRoll < 90 && rotationLock ? 1 : 0;
@@ -31,7 +31,7 @@ public class LaserBeam {
 		float r = color[1];
 		float s = color[2];
 		matrixStack.push();
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(n * 2.25F - 45.0F));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(n * 2.25F - 45.0F));
 		float af = 0.0F;
 		float ai = 0.0F;
 		float aj = -innerSize;

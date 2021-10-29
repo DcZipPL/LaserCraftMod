@@ -1,20 +1,23 @@
 package tk.dczippl.lasercraft.plugin.techreborn;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 import reborncore.api.IToolDrop;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.screen.BuiltScreenHandlerProvider;
 import reborncore.client.screen.builder.BuiltScreenHandler;
 import reborncore.client.screen.builder.ScreenHandlerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+import reborncore.common.powerSystem.RcEnergyTier;
 import reborncore.common.util.RebornInventory;
-import team.reborn.energy.EnergySide;
 import techreborn.blockentity.machine.tier1.AutoCraftingTableBlockEntity;
 import tk.dczippl.lasercraft.fabric.blocks.ModBlocks;
 import tk.dczippl.lasercraft.fabric.blocks.entities.ModBlockEntities;
@@ -28,25 +31,15 @@ public class LensAssemblerBlockEntity extends PowerAcceptorBlockEntity implement
 	public int euTick = 10;
 	public int balanceSlot = 0;
 
-	public LensAssemblerBlockEntity() {
-		super(ModBlockEntities.LENS_ASSEMBLER);
+	public LensAssemblerBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.LENS_ASSEMBLER, pos, state);
 	}
-
+	
 	@Override
-	public double getBaseMaxPower() {
-		return 10000;
+	public RcEnergyTier getTier() {
+		return RcEnergyTier.MEDIUM;
 	}
-
-	@Override
-	public double getBaseMaxOutput() {
-		return 0.0D;
-	}
-
-	@Override
-	public double getBaseMaxInput() {
-		return 32;
-	}
-
+	
 	@Override
 	public ItemStack getToolDrop(PlayerEntity playerEntity) {
 		return new ItemStack(ModBlocks.LENS_ASSEMBLER);
@@ -59,7 +52,7 @@ public class LensAssemblerBlockEntity extends PowerAcceptorBlockEntity implement
 
 	@Override
 	public BuiltScreenHandler createScreenHandler(int syncID, PlayerEntity player) {
-		return (new ScreenHandlerBuilder("lensassembler")).player(player.inventory)
+		return (new ScreenHandlerBuilder("lensassembler")).player(player.getInventory())
 				.inventory().hotbar().addInventory().blockEntity(this)
 				.slot(0, 28, 25)
 				.slot(1, 46, 25)
@@ -89,12 +82,27 @@ public class LensAssemblerBlockEntity extends PowerAcceptorBlockEntity implement
 
 	public void setProgress(int progress) {
 	}
-
+	
 	@Override
-	protected boolean canProvideEnergy(EnergySide side) {
+	protected boolean canProvideEnergy(@Nullable Direction side) {
 		return false;
 	}
-
+	
+	@Override
+	public long getBaseMaxPower() {
+		return 10000;
+	}
+	
+	@Override
+	public long getBaseMaxOutput() {
+		return 0;
+	}
+	
+	@Override
+	public long getBaseMaxInput() {
+		return RcEnergyTier.MEDIUM.getMaxInput();
+	}
+	
 	public boolean canBeUpgraded() {
 		return false;
 	}

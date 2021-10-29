@@ -12,6 +12,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import tk.dczippl.lasercraft.fabric.blocks.entities.LensTableBlockEntity;
 
 public class LensTableBlock extends BlockWithEntity {
@@ -55,8 +56,9 @@ public class LensTableBlock extends BlockWithEntity {
 		return BlockRenderType.MODEL;
 	}
 
+	@Nullable
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return new LensTableBlockEntity();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new LensTableBlockEntity(pos,state);
 	}
 }

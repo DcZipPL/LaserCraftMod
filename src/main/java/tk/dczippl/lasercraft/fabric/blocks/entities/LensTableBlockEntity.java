@@ -3,30 +3,32 @@ package tk.dczippl.lasercraft.fabric.blocks.entities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.init.ModTags;
 import tk.dczippl.lasercraft.fabric.items.ModItems;
 import tk.dczippl.lasercraft.fabric.screens.handlers.LensTableScreenHandler;
 import tk.dczippl.lasercraft.fabric.util.ImplementedInventory;
 import tk.dczippl.lasercraft.fabric.util.LensValues;
 
-public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, Tickable {
+public class LensTableBlockEntity  extends BlockEntity implements BlockEntityTicker<LensTableBlockEntity>, NamedScreenHandlerFactory, ImplementedInventory {
 	private int invsize = 6;
 	private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
 
-	public LensTableBlockEntity() {
-		super(ModBlockEntities.LENS_TABLE);
+	public LensTableBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.LENS_TABLE, pos, state);
 	}
 
 	//These Methods are from the NamedScreenHandlerFactory Interface
@@ -46,16 +48,16 @@ public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHan
 	}
 
 	@Override
-	public void fromTag(BlockState state, CompoundTag tag) {
-		super.fromTag(state, tag);
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
 		inventory = DefaultedList.ofSize(invsize, ItemStack.EMPTY);
-		Inventories.fromTag(tag, this.inventory);
+		Inventories.readNbt(tag, this.inventory);
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
-		Inventories.toTag(tag, this.inventory);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
+		Inventories.writeNbt(tag, this.inventory);
 		return tag;
 	}
 
@@ -75,13 +77,13 @@ public class LensTableBlockEntity  extends BlockEntity implements NamedScreenHan
 	}
 
 	@Override
-	public void tick() {
+	public void tick(World world, BlockPos pos, BlockState state, LensTableBlockEntity blockEntity) {
 		if (ModTags.LENS_BORDER.contains(inventory.get(0).getItem())){
 			if (ModTags.LENS_GLASS.contains(inventory.get(3).getItem())){
 				ItemStack lens = new ItemStack(ModItems.LENS);
-				lens.getOrCreateTag().putInt("color",getColor());
-				lens.getTag().putInt("strength",getStrength());
-				lens.getTag().putInt("range",getRange());
+				lens.getOrCreateNbt().putInt("color",getColor());
+				lens.getNbt().putInt("strength",getStrength());
+				lens.getNbt().putInt("range",getRange());
 				inventory.set(6,lens);
 			}
 		}

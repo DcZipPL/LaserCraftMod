@@ -32,8 +32,9 @@ public class LaserCraft implements ModInitializer {
 
 		ModBlocks.register();
 		ModItems.register();
-
-		BlockEntityRendererRegistry.INSTANCE.register((BlockEntityType<LaserBlockEntity>) ModBlockEntities.LASER, LaserBlockEntityRender::new);
+		
+		net.fabricmc.fabric.api.client.rendering.v1.
+				BlockEntityRendererRegistry.register((BlockEntityType<LaserBlockEntity>) ModBlockEntities.LASER, (context)-> new LaserBlockEntityRender());
 	}
 
 	static {

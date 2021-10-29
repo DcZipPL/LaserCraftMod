@@ -24,9 +24,6 @@
     "client": [
       "tk.dczippl.lasercraft.ClientLaserCraft"
     ],
-    "rei_plugins_v0": [
-      "me.shedaniel.rei.plugin.DefaultPlugin"
-    ],
     "cardinal-components-entity": [
       "tk.dczippl.lasercraft.fabric.init.ModComponent"
     ],
@@ -46,7 +43,7 @@
   "suggests": {
     "flamingo": "*"
   },
-
+  "accessWidener" : "lasercraft.accesswidener",
   "custom": {
     "cardinal-components": [
       "lasercraft:breakdata"

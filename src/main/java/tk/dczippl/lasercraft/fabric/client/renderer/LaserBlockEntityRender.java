@@ -19,11 +19,7 @@ import tk.dczippl.lasercraft.fabric.items.ModItems;
 
 import static net.minecraft.util.math.Direction.*;
 
-public class LaserBlockEntityRender extends BlockEntityRenderer<LaserBlockEntity> {
-	public LaserBlockEntityRender(BlockEntityRenderDispatcher dispatcher) {
-		super(dispatcher);
-	}
-
+public class LaserBlockEntityRender implements BlockEntityRenderer<LaserBlockEntity> {
 	@Override
 	public void render(LaserBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		matrices.push();

@@ -1,7 +1,7 @@
 package tk.dczippl.lasercraft.fabric.util;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tk.dczippl.lasercraft.fabric.components.IntegerComponent;
@@ -13,12 +13,12 @@ public class BreakData {
 		int progress = 0;
 
 		@Override
-		public void readFromNbt(CompoundTag compoundTag) {
+		public void readFromNbt(NbtCompound compoundTag) {
 			progress = compoundTag.getInt("progress");
 		}
 
 		@Override
-		public void writeToNbt(CompoundTag compoundTag) {
+		public void writeToNbt(NbtCompound compoundTag) {
 			compoundTag.putInt("progress",progress);
 		}
 

@@ -20,9 +20,9 @@ public class LensItem extends Item {
 	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		String color = stack.getOrCreateTag().contains("color") ? String.valueOf(stack.getTag().getInt("color")) : "0";
-		String strength = stack.getOrCreateTag().contains("strength") ? String.valueOf(stack.getTag().getInt("strength")) : "0";
-		String range = stack.getOrCreateTag().contains("color") ? String.valueOf(stack.getTag().getInt("range")) : "0";
+		String color = stack.getOrCreateNbt().contains("color") ? String.valueOf(stack.getNbt().getInt("color")) : "0";
+		String strength = stack.getOrCreateNbt().contains("strength") ? String.valueOf(stack.getNbt().getInt("strength")) : "0";
+		String range = stack.getOrCreateNbt().contains("color") ? String.valueOf(stack.getNbt().getInt("range")) : "0";
 		tooltip.add(new TranslatableText("tooltip.lasercraft.color").append(new LiteralText(color)));
 		tooltip.add(new TranslatableText("tooltip.lasercraft.strength").append(new LiteralText(strength)));
 		tooltip.add(new TranslatableText("tooltip.lasercraft.range").append(new LiteralText(range)));
